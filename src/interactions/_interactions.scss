@@ -1,0 +1,28 @@
+.hand {
+    display: grid;
+    justify-content: center;
+    padding: 25px;
+
+    .player {
+        display: flex;
+        align-items: center;
+
+        .player-interactions {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    img {
+        max-width: 150px;
+        justify-content: center;
+    }
+}
+
+.interactions {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    padding: 25px;
+    color: crimson;
+}
