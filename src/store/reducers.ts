@@ -1,6 +1,6 @@
 import { DECKOFCARDS } from './deck-of-cards';
 import { addCardsBack, getCardsOffDeck, getHandScore, shuffleDeck } from './helpers';
-import { HIT, IActions, IGameState, IPlayer, STICK } from './model';
+import { HIT, Actions, GameState, Player, STICK } from './model';
 import { START } from './model';
 
 const initialDeck = () => {
@@ -8,7 +8,7 @@ const initialDeck = () => {
     return deck;
 };
 
-const players: IPlayer[] = [
+const players: Player[] = [
     {
         id: 'p1',
         name: 'Zan',
@@ -27,14 +27,14 @@ const players: IPlayer[] = [
     },
 ]
 
-const initialGameState: IGameState = {
+const initialGameState: GameState = {
         player: players,
         deck: initialDeck(),
     }
 
 export const uiState: any = (
-    gameState: IGameState = initialGameState,
-    action: IActions
+    gameState: GameState = initialGameState,
+    action: Actions
 ) => {
     switch (action.type) {
         case START:
@@ -86,7 +86,7 @@ export const uiState: any = (
                 ],
             };
         case STICK:
-            let nextPlayer: IPlayer;
+            let nextPlayer: Player;
 
             return {
                 ...gameState,

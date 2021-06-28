@@ -1,4 +1,4 @@
-export interface IPlayingCard {
+export type PlayingCard = {
     id: string;
     value: CardValues;
     suit: CardSuits;
@@ -11,15 +11,15 @@ export type CardValues = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 export type CardSuits = 'club' | 'spade' | 'heart' | 'diamond';
 export type CardFaces = 'ace' | 'jack' | 'queen' | 'king' | null;
 
-export interface IGameState {
-    player: IPlayer[];
-    deck: IPlayingCard[];
+export type GameState = {
+    player: Player[];
+    deck: PlayingCard[];
 }
 
-export interface IPlayer {
+export type Player = {
     id: string;
     name: string;
-    playerHand: IPlayingCard[];
+    playerHand: PlayingCard[];
     playerScore: number;
     isPlaying: boolean;
     stickCalled: boolean;
@@ -29,7 +29,7 @@ export const HIT =  '[HIT]';
 export const STICK =  '[STICK]';
 export const START = '[START]';
 
-export interface IActions {
+export type Actions = {
     type: typeof START | typeof HIT | typeof STICK;
-    player: IPlayer[];
+    player: Player[];
 }

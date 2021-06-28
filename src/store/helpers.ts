@@ -1,6 +1,6 @@
-import {  IPlayer, IPlayingCard } from './model';
+import {  Player, PlayingCard } from './model';
 
-export function addCardsBack(cards: IPlayingCard[], players: IPlayer[]): IPlayingCard[] {
+export function addCardsBack(cards: PlayingCard[], players: Player[]): PlayingCard[] {
     let deck = Object.values(cards);
 
     players.map(ph => {
@@ -14,7 +14,7 @@ export function addCardsBack(cards: IPlayingCard[], players: IPlayer[]): IPlayin
     return deck;
 }
 
-export function shuffleDeck(cards: IPlayingCard[]): IPlayingCard[] {
+export function shuffleDeck(cards: PlayingCard[]): PlayingCard[] {
     const deck = Object.values(cards);
     let m = deck.length;
     let i: number;
@@ -30,13 +30,13 @@ export function shuffleDeck(cards: IPlayingCard[]): IPlayingCard[] {
 }
 
 export function getCardsOffDeck(
-    cards: IPlayingCard[],
+    cards: PlayingCard[],
     numberOfCards: number
 ): {
-    hand: IPlayingCard[];
-    deck: IPlayingCard[];
+    hand: PlayingCard[];
+    deck: PlayingCard[];
 } {
-    let h: IPlayingCard[] = [];
+    let h: PlayingCard[] = [];
     while (numberOfCards > 0) {
         h.push(cards.shift()!);
         numberOfCards--;
@@ -44,6 +44,6 @@ export function getCardsOffDeck(
     return { hand: h, deck: cards };
 }
 
-export function getHandScore(cards: IPlayingCard[]): number {
+export function getHandScore(cards: PlayingCard[]): number {
     return cards.reduce((x, y) => x + y.value, 0);
 }

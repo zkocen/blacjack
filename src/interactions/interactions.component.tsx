@@ -1,8 +1,8 @@
-import { IGameState, IPlayer, IPlayingCard } from '../store/model';
+import { GameState, Player, PlayingCard } from '../store/model';
 import store from '../store/store';
 import { connect } from 'react-redux';
 
-function mapStateToProps(s: IGameState) {
+function mapStateToProps(s: GameState) {
     return {
         player: s.player,
     };
@@ -17,7 +17,7 @@ function Interactions() {
         store.dispatch({ type: '[HIT]', player: s.player });
     }
 
-    function Stick(player: IPlayer) {
+    function Stick(player: Player) {
         store.dispatch({
             type: '[STICK]', player: [{
                 ...player, stickCalled: !player.stickCalled
@@ -25,7 +25,7 @@ function Interactions() {
         });
     }
 
-    function whoWon(p: IPlayer[]) {
+    function whoWon(p: Player[]) {
         for (const currentPlayer of p) {
             if (currentPlayer.playerScore > 21) {
                 return currentPlayer.name + ' lost :('
@@ -62,7 +62,7 @@ function Interactions() {
     }
 
 
-    const s: IGameState | any = store.getState();
+    const s: GameState | any = store.getState();
 
     return (
         <div>
@@ -72,13 +72,13 @@ function Interactions() {
                     <br />
                     {whoWon(s.player)}
                 </div>
-                {s.player.map((player: IPlayer, i: number) => {
+                {s.player.map((player: Player, i: number) => {
                     return (
                         <div className="player" key={i}>
                             <div className="results">
                                 <span className={player.isPlaying ? "bold" : ""}>Player: {player.name} &nbsp;<br /> Score: {player.playerScore}</span>
                             </div>
-                            {player.playerHand && player.playerHand.map((hand: IPlayingCard, j: number) =>
+                            {player.playerHand && player.playerHand.map((hand: PlayingCard, j: number) =>
                                 <div key={j}>
                                     <img src={require('../assets/cards/' + hand.image + '.svg').default} key={hand.id} alt={hand.image} />
                                 </div>

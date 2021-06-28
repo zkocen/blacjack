@@ -1,6 +1,6 @@
-import { IPlayingCard } from './model';
+import { PlayingCard } from './model';
 
-export const DECKOFCARDS: IPlayingCard[] = [
+export const DECKOFCARDS: PlayingCard[] = [
     {
         id: 'c1',
         value: 1,
