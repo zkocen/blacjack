@@ -36,9 +36,12 @@ export function getCardsOffDeck(
     hand: PlayingCard[];
     deck: PlayingCard[];
 } {
-    let h: PlayingCard[] = [];
+    const h: PlayingCard[] = [];
     while (numberOfCards > 0) {
-        h.push(cards.shift()!);
+        const firstCard = cards.shift();
+        if (firstCard) {
+            h.push(firstCard);
+        }
         numberOfCards--;
     }
     return { hand: h, deck: cards };

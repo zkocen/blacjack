@@ -1,3 +1,4 @@
+import React from 'react';
 import { GameState, Player, PlayingCard } from '../store/model';
 import store from '../store/store';
 import { connect } from 'react-redux';
@@ -10,7 +11,7 @@ function mapStateToProps(s: GameState) {
 
 function Interactions() {
     function startNewGame() {
-        store.dispatch({ type: '[START]' });
+        store.dispatch({ type: '[START]', player: s.player });
     }
 
     function hitMe() {
@@ -37,12 +38,12 @@ function Interactions() {
         }
 
         if (p.filter(players => players.stickCalled).length === p.length) {
-            let playerScoresArray = p.map(x => x.playerScore);
+            const playerScoresArray = p.map(x => x.playerScore);
             const closestNumber = playerScoresArray.reduce(function (a, b) {
                 return (Math.abs(b - 21) < Math.abs(a - 21) ? b : a);
             });
 
-            let winners = p.map(x => {
+            const winners = p.map(x => {
                 if (x['playerScore'] === closestNumber) {
                     return x;
                 }
@@ -62,7 +63,7 @@ function Interactions() {
     }
 
 
-    const s: GameState | any = store.getState();
+    const s: GameState = store.getState();
 
     return (
         <div>
@@ -80,11 +81,13 @@ function Interactions() {
                             </div>
                             {player.playerHand && player.playerHand.map((hand: PlayingCard, j: number) =>
                                 <div key={j}>
+                                    {/* eslint-disable-next-line @typescript-eslint/no-var-requires */}
                                     <img src={require('../assets/cards/' + hand.image + '.svg').default} key={hand.id} alt={hand.image} />
                                 </div>
                             )}
                             <div className="player-interactions">
-                                {whoWon(s.player) === '' && player.isPlaying && <button onClick={e => Stick(player)}>Stick</button>}
+                                {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
+                                {whoWon(s.player) === '' && player.isPlaying && <button onClick={_ => Stick(player)}>Stick</button>}
                                 {whoWon(s.player) === '' && player.isPlaying && <button onClick={hitMe}>Hit</button>}
                             </div>
                         </div>)

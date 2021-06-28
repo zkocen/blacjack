@@ -1,12 +1,13 @@
+import React  from 'react';
 import './_App.scss';
-import  HandComponent  from './playing-table/table.component';
+import Interactions from './interactions/interactions.component';
 
-function App() {
-  return (
-    <div className="App">
-        <HandComponent/>
-    </div>
-  );
-}
+const App: React.FunctionComponent = (): JSX.Element => {
+    return (
+        <div className="App">
+            <Interactions />
+        </div>
+    );
+};
 
 export default App;

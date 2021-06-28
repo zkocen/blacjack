@@ -32,7 +32,7 @@ const initialGameState: GameState = {
         deck: initialDeck(),
     }
 
-export const uiState: any = (
+export const uiState: (gameState: GameState | undefined, action: Actions) => GameState = (
     gameState: GameState = initialGameState,
     action: Actions
 ) => {
@@ -74,7 +74,7 @@ export const uiState: any = (
                 deck: currentMove.deck,
                 player: [
                     ...gameState.player.map((p, i) => {
-                        if (p.id === action.player[i].id && action.player[i].isPlaying) {
+                        if (p.id === action?.player[i].id && action.player[i].isPlaying) {
                                 return {
                                     ...p,
                                     playerHand: [...p.playerHand, currentMove.hand].flat(),
