@@ -21,15 +21,19 @@ export type Player = {
     name: string;
     playerHand: PlayingCard[];
     playerScore: number;
+    playerTotalScore: number;
     isPlaying: boolean;
+    stoppedPlaying: boolean;
     stickCalled: boolean;
 }
 
 export const HIT =  '[HIT]';
 export const STICK =  '[STICK]';
 export const START = '[START]';
+export const RESET = '[RESET]';
+export const STOP = '[STOP]';
 
 export type Actions = {
-    type: typeof START | typeof HIT | typeof STICK;
+    type: typeof START | typeof HIT | typeof STICK | typeof RESET | typeof STOP;
     player: Player[];
 }

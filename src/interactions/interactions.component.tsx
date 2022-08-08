@@ -10,8 +10,16 @@ function mapStateToProps(s: GameState) {
 }
 
 function Interactions() {
-    function startNewGame() {
+    function startNewPlay() {
         store.dispatch({ type: '[START]', player: s.player });
+    }
+
+    function resetGame() {
+        store.dispatch({ type: '[RESET]', player: s.player });
+    }
+
+    function stopPlaying() {
+        store.dispatch({ type: '[STOP]', player: s.player });
     }
 
     function hitMe() {
@@ -24,6 +32,12 @@ function Interactions() {
                 ...player, stickCalled: !player.stickCalled
             }]
         });
+    }
+
+    function overallWinner(p: Player[]) {
+        return p.reduce((a, b) => (
+            (a.playerTotalScore > b.playerTotalScore) ? a : b
+        )).name
     }
 
     function whoWon(p: Player[]) {
@@ -69,17 +83,29 @@ function Interactions() {
         <div>
             <div className="hand">
                 <div className="interactions">
-                    <button onClick={startNewGame}>Start a new game</button>
+                    <button onClick={startNewPlay}>Start a new play</button>
+                    <button onClick={resetGame}>Reset game</button>
+                    <button onClick={stopPlaying}>Stop playing</button>
                     <br />
                     {whoWon(s.player)}
                 </div>
                 {s.player.map((player: Player, i: number) => {
                     return (
                         <div className="player" key={i}>
-                            <div className="results">
-                                <span className={player.isPlaying ? "bold" : ""}>Player: {player.name} &nbsp;<br /> Score: {player.playerScore}</span>
+                            {player.stoppedPlaying === false &&
+                                <div className="results">
+                                    <span className={player.isPlaying ? "bold" : ""}>Player: {player.name} &nbsp;
+                                        <br /> Score: {player.playerScore}
+                                        <br /> Total score: {player.playerTotalScore}
+                                    </span>
+                                </div>
+                            }
+                            {player.stoppedPlaying && i === 0 &&
+                            <div>
+                                Overal highest score has {overallWinner(s.player)}
                             </div>
-                            {player.playerHand && player.playerHand.map((hand: PlayingCard, j: number) =>
+                            }
+                            {player.stoppedPlaying === false && player.playerHand && player.playerHand.map((hand: PlayingCard, j: number) =>
                                 <div key={j}>
                                     {/* eslint-disable-next-line @typescript-eslint/no-var-requires */}
                                     <img src={require('../assets/cards/' + hand.image + '.svg').default} key={hand.id} alt={hand.image} />

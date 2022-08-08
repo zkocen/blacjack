@@ -39,8 +39,25 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## The rules
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The (simplified) rules of blackjack are as follows:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+A player requests cards. If their total exceeds 21, they automatically lose. They can 'stick' at any time, which restarts their hand.
+
+We will use a full deck of cards, minus the jokers. This means:
+
+ACE, 2, 3, 4, 5, 6, 7, 8, 9, Jack, Queen, King
+
+And the suits:
+
+Club, Spade, Heart, Diamond
+
+...for a total of 52 cards.
+
+
+ACE may represent 1 or 11, but initially let's just assume it always represents 1.
+2, 3, 4, 5, 6, 7, 8, 9 represent their normal numerical value.
+JACK, QUEEN and KING represent 10.
+
+The suit has no bearing on the value of the card in the game.
